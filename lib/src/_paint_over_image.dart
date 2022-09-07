@@ -964,7 +964,7 @@ class ImagePainterState extends State<ImagePainter> {
                               paintModes(textDelegate)
                                   .firstWhere((item) => item.mode == _ctrl.mode,
                                       orElse: () => ModeData(
-                                          icon: Icons.text_format,
+                                          icon: Icons.text_fields,
                                           mode: PaintMode.text,
                                           label: textDelegate.text))
                                   .icon,
@@ -981,8 +981,12 @@ class ImagePainterState extends State<ImagePainter> {
                     ValueListenableBuilder<Controller>(
                       valueListenable: _controller,
                       builder: (_, value, __) {
-                        final algo = paintModes(textDelegate)
-                            .firstWhere((item) => item.mode == _ctrl.mode);
+                        final algo = paintModes(textDelegate).firstWhere(
+                            (item) => item.mode == _ctrl.mode,
+                            orElse: () => ModeData(
+                                icon: Icons.text_fields,
+                                mode: PaintMode.text,
+                                label: textDelegate.text));
 
                         return Text(
                           algo.label ?? "",
